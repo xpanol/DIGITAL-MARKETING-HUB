@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MARKETING DIGITAL | XPAÑOL</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:'Special Elite',cursive;
+}
+
+body{
+    min-height:100vh;
+    background:#7c3aed;
+    color:white;
+    padding:50px 30px;
+}
+
+.header{
+    text-align:center;
+    margin-bottom:60px;
+}
+
+.header h1{
+    font-size:clamp(2.4rem,5vw,4.5rem);
+    letter-spacing:2px;
+    margin-bottom:15px;
+}
+
+.subtitle{
+    opacity:.9;
+    font-size:1rem;
+}
+
+.grid{
+    max-width:1300px;
+    margin:auto;
+
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fit,minmax(300px,1fr));
+
+    gap:28px;
+}
+
+.card{
+    background:white;
+    color:#111;
+
+    text-decoration:none;
+
+    border-radius:22px;
+
+    padding:35px;
+
+    min-height:210px;
+
+    box-shadow:
+    0 15px 35px rgba(0,0,0,.15);
+
+    transition:.25s ease;
+}
+
+.card:hover{
+    transform:translateY(-6px);
+
+    box-shadow:
+    0 25px 45px rgba(0,0,0,.22);
+}
+
+.card h3{
+    font-size:1.6rem;
+    margin-bottom:20px;
+    line-height:1.3;
+}
+
+.card p{
+    line-height:1.7;
+    opacity:.75;
+}
+
+.footer{
+    text-align:center;
+    margin-top:60px;
+}
+
+.logout-btn{
+    background:transparent;
+    color:white;
+
+    border:2px solid rgba(255,255,255,.6);
+
+    border-radius:14px;
+
+    padding:16px 30px;
+
+    font-size:1rem;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+.logout-btn:hover{
+    background:white;
+    color:#7c3aed;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+    <h1>
+        MARKETING DIGITAL
+    </h1>
+
+    <div class="subtitle">
+        ENGLISH + ESPAÑOL • BY XPAÑOL
+    </div>
+
+</div>
+
+<div class="grid">
+
+    <a class="card"
+       href="https://xpanol.github.io/CUSTOMEE/">
+
+        <h3>FRASEO</h3>
+
+        <p>
+            Repetition and phrase acquisition system.
+        </p>
+
+    </a>
+
+    <a class="card"
+       href="#">
+
+        <h3>INMERSIÓN AUDITIVA</h3>
+
+        <p>
+            Real conversations and listening immersion.
+        </p>
+
+    </a>
+
+    <a class="card"
+       href="#">
+
+        <h3>KEYWORDS</h3>
+
+        <p>
+            Essential sector vocabulary and terminology.
+        </p>
+
+    </a>
+
+    <a class="card"
+       href="#">
+
+        <h3>PRO!NUNCIA LIKE A PRO</h3>
+
+        <p>
+            Pronunciation and speaking confidence training.
+        </p>
+
+    </a>
+
+    <a class="card"
+       href="#">
+
+        <h3>PRO!READ</h3>
+
+        <p>
+            Guided reading practice with authentic content.
+        </p>
+
+    </a>
+
+    <a class="card"
+       href="#">
+
+        <h3>PALABRA RÁPIDA</h3>
+
+        <p>
+            Fast vocabulary acquisition and recall training.
+        </p>
+
+    </a>
+
+</div>
+
+<div class="footer">
+
+    <button
+        class="logout-btn"
+        id="logoutBtn">
+
+        LOGOUT
+
+    </button>
+
+</div>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
+
+import {
+getAuth,
+signOut
+}
+from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAAGPNktzjNlqXirf4bq-MVYRynW88oiP4",
+  authDomain: "fraseo-marketing-digital.firebaseapp.com",
+  projectId: "fraseo-marketing-digital",
+  storageBucket: "fraseo-marketing-digital.firebasestorage.app",
+  messagingSenderId: "238473898395",
+  appId: "1:238473898395:web:ec7763b50c31d486d6193e"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+document
+.getElementById("logoutBtn")
+.addEventListener("click", async () => {
+
+    await signOut(auth);
+
+    window.location.href =
+    "/";
+
+});
+
+</script>
+
+</body>
+</html>
