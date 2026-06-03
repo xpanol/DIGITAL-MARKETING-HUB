@@ -23,86 +23,69 @@
 }
 
 body{
-
     min-height:100vh;
-
     background:#7c3aed;
-
     color:white;
-
     padding:50px 30px;
-
     position:relative;
-
     overflow-x:hidden;
 }
 
 body::before{
-
     content:"";
-
     position:fixed;
-
     inset:0;
-
     background:rgba(0,0,0,.55);
-
     pointer-events:none;
-
     z-index:0;
+}
+
+#loading{
+    position:fixed;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-size:24px;
+    z-index:9999;
 }
 
 .header,
 .grid,
 .footer{
-
     position:relative;
-
     z-index:1;
 }
 
 .header{
-
     text-align:center;
-
     margin-bottom:70px;
 }
 
 .header h1{
-
     font-size:4rem;
-
     margin-bottom:15px;
-
     letter-spacing:2px;
 }
 
 .subtitle{
-
     opacity:.9;
-
     font-size:1rem;
 }
 
 .grid{
-
     max-width:1200px;
-
     margin:auto;
 
     display:grid;
-
     grid-template-columns:repeat(3,1fr);
-
     gap:30px;
 }
 
 .card{
-
     background:white;
-
     color:#111;
-
     text-decoration:none;
 
     border-radius:24px;
@@ -110,9 +93,7 @@ body::before{
     min-height:220px;
 
     display:flex;
-
     align-items:center;
-
     justify-content:center;
 
     text-align:center;
@@ -126,7 +107,6 @@ body::before{
 }
 
 .card:hover{
-
     transform:translateY(-6px);
 
     box-shadow:
@@ -134,23 +114,17 @@ body::before{
 }
 
 .card h3{
-
     font-size:2rem;
-
     line-height:1.4;
 }
 
 .footer{
-
     text-align:center;
-
     margin-top:60px;
 }
 
 .logout-btn{
-
     background:transparent;
-
     color:white;
 
     border:2px solid rgba(255,255,255,.7);
@@ -167,16 +141,13 @@ body::before{
 }
 
 .logout-btn:hover{
-
     background:white;
-
     color:#7c3aed;
 }
 
 @media(max-width:1100px){
 
     .grid{
-
         grid-template-columns:repeat(2,1fr);
     }
 
@@ -185,12 +156,10 @@ body::before{
 @media(max-width:700px){
 
     .grid{
-
         grid-template-columns:1fr;
     }
 
     .header h1{
-
         font-size:2.5rem;
     }
 
@@ -201,6 +170,12 @@ body::before{
 </head>
 
 <body>
+
+<div id="loading">
+    Checking access...
+</div>
+
+<div id="app" style="display:none;">
 
 <div class="header">
 
@@ -221,36 +196,31 @@ body::before{
 
     </a>
 
-    <a class="card"
-       href="#">
+    <a class="card" href="#">
 
         <h3>INMERSIÓN AUDITIVA</h3>
 
     </a>
 
-    <a class="card"
-       href="#">
+    <a class="card" href="#">
 
         <h3>KEYWORDS</h3>
 
     </a>
 
-    <a class="card"
-       href="#">
+    <a class="card" href="#">
 
         <h3>PRO!NUNCIA<br>LIKE A PRO</h3>
 
     </a>
 
-    <a class="card"
-       href="#">
+    <a class="card" href="#">
 
         <h3>PRO!READ</h3>
 
     </a>
 
-    <a class="card"
-       href="#">
+    <a class="card" href="#">
 
         <h3>PALABRA<br>RÁPIDA</h3>
 
@@ -270,14 +240,17 @@ body::before{
 
 </div>
 
+</div>
+
 <script type="module">
 
 import { initializeApp }
 from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
 
 import {
-getAuth,
-signOut
+    getAuth,
+    onAuthStateChanged,
+    signOut
 }
 from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
 
@@ -293,6 +266,27 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
+const loading =
+document.getElementById("loading");
+
+const appContainer =
+document.getElementById("app");
+
+onAuthStateChanged(auth, (user) => {
+
+    if (!user) {
+
+        window.location.href =
+        "https://xpanol.github.io/MARKETING-PORTAL/";
+
+        return;
+    }
+
+    loading.style.display = "none";
+    appContainer.style.display = "block";
+
+});
+
 document
 .getElementById("logoutBtn")
 .addEventListener("click", async () => {
@@ -300,7 +294,7 @@ document
     await signOut(auth);
 
     window.location.href =
-"https://xpanol.github.io/MARKETING-PORTAL/";
+    "https://xpanol.github.io/MARKETING-PORTAL/";
 
 });
 
